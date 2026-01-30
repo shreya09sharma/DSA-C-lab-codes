@@ -1,0 +1,174 @@
+#include <stdio.h>
+
+int main()
+{
+    int ch, n, i;
+    int arr[100];   // fixed size array
+
+    printf("Enter the size of array: ");
+    scanf("%d", &n);
+
+    for(i = 0; i < n; i++)
+    {
+        printf("Element %d = ", i + 1);
+        scanf("%d", &arr[i]);
+    }
+
+    do
+    {
+        printf("\n\n1. Insert element");
+        printf("\n2. Delete element");
+        printf("\n3. Linear Search");
+        printf("\n4. Binary Search");
+        printf("\n5. Bubble Sort");
+        printf("\n6. Selection Sort");
+        printf("\n7. Exit");
+        printf("\nEnter your choice: ");
+        scanf("%d", &ch);
+
+        switch(ch)
+        {
+            case 1:   // INSERT
+            {
+                int index, ele;
+                printf("Enter index: ");
+                scanf("%d", &index);
+
+                printf("Enter element: ");
+                scanf("%d", &ele);
+
+                for(i = n; i > index; i--)
+                    arr[i] = arr[i-1];
+
+                arr[index] = ele;
+                n++;
+
+                printf("Array after insertion:\n");
+                for(i = 0; i < n; i++)
+                    printf("%d ", arr[i]);
+                break;
+            }
+
+            case 2:   // DELETE
+            {
+                int index;
+                printf("Enter index to delete: ");
+                scanf("%d", &index);
+
+                for(i = index; i < n-1; i++)
+                    arr[i] = arr[i+1];
+
+                n--;
+
+                printf("Array after deletion:\n");
+                for(i = 0; i < n; i++)
+                    printf("%d ", arr[i]);
+                break;
+            }
+
+            case 3:   // LINEAR SEARCH
+            {
+                int target, flag = 0;
+                printf("Enter element to search: ");
+                scanf("%d", &target);
+
+                for(i = 0; i < n; i++)
+                {
+                    if(arr[i] == target)
+                    {
+                        flag = 1;
+                        break;
+                    }
+                }
+
+                if(flag == 1)
+                    printf("Element found");
+                else
+                    printf("Element not found");
+                break;
+            }
+
+            case 4:   // BINARY SEARCH
+            {
+                int num, found = 0;
+                int low = 0, high = n - 1, mid;
+
+                printf("Enter element to search: ");
+                scanf("%d", &num);
+
+                while(low <= high)
+                {
+                    mid = (low + high) / 2;
+
+                    if(arr[mid] == num)
+                    {
+                        printf("Element found at position %d", mid + 1);
+                        found = 1;
+                        break;
+                    }
+                    else if(arr[mid] < num)
+                        low = mid + 1;
+                    else
+                        high = mid - 1;
+                }
+
+                if(found == 0)
+                    printf("Element not found");
+                break;
+            }
+
+            case 5:   // BUBBLE SORT
+            {
+                int temp;
+                for(i = 0; i < n-1; i++)
+                {
+                    for(int j = 0; j < n-1-i; j++)
+                    {
+                        if(arr[j] > arr[j+1])
+                        {
+                            temp = arr[j];
+                            arr[j] = arr[j+1];
+                            arr[j+1] = temp;
+                        }
+                    }
+                }
+
+                printf("Array after Bubble Sort:\n");
+                for(i = 0; i < n; i++)
+                    printf("%d ", arr[i]);
+                break;
+            }
+
+            case 6:   // SELECTION SORT
+            {
+                int temp;
+                for(i = 0; i < n-1; i++)
+                {
+                    int min = i;
+                    for(int j = i + 1; j < n; j++)
+                        if(arr[j] < arr[min])
+                            min = j;
+
+                    temp = arr[i];
+                    arr[i] = arr[min];
+                    arr[min] = temp;
+                }
+
+                printf("Array after Selection Sort:\n");
+                for(i = 0; i < n; i++)
+                    printf("%d ", arr[i]);
+                break;
+            }
+
+            case 7:
+                printf("Exiting program...");
+                break;
+
+            default:
+                printf("Invalid choice");
+        }
+
+    } while(ch != 7);
+
+    return 0;
+}

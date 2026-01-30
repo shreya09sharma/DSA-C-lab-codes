@@ -1,0 +1,21 @@
+#include <stdio.h>
+#include<string.h>
+
+int main() {
+    // Write C code here
+    char strg[100];
+    printf("enter a string\n");
+    scanf("%[^\n]",&strg);
+    int len=strlen(strg);
+    for(int i=0;i<len;i++)
+    {
+        if(strg[i]>='A'&&strg[i]<='Z')
+        {
+            strg[i]=strg[i]+32;
+    
+        }
+    }
+  printf("%s", strg);
+
+    return 0;
+}

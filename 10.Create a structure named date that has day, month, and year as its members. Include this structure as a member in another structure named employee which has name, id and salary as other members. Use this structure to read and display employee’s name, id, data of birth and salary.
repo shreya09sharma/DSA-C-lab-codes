@@ -1,0 +1,42 @@
+#include <stdio.h>
+#include<string.h>
+
+    struct date
+    {
+        int day;
+        int month;
+        int year;
+    };
+    struct employee
+    {
+        char name[100];
+        struct date birthday;
+        int id;
+        int salary;
+    }person;
+    int main()
+    {
+        printf("enter name\n");
+        scanf("%[^\n]", person.name);
+        printf("enter the day of birthday\n");
+        scanf("%d" , &person.birthday.day);
+        printf("enter the month of the birthday\n");
+        scanf("%d", &person.birthday.month);
+        printf("enter the year of the birthday\n");
+        scanf("%d", &person.birthday.year);
+        printf("enter the id\n");
+        scanf("%d", &person.id);
+        printf("enter the salary\n");
+        scanf("%d", &person.salary);
+         printf("\nEmployee Details:\n");
+
+    printf("Name: %s\n", person.name);
+    printf("ID: %d\n", person.id);
+    printf("Date of Birth: %d,%d,%d\n",
+           person.birthday.day,
+           person.birthday.month,
+           person.birthday.year);
+    printf("Salary: %d\n", person.salary);
+    
+    return 0;
+}

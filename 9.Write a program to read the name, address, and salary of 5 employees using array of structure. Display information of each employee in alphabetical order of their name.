@@ -1,0 +1,48 @@
+// Online C compiler to run C program online
+#include <stdio.h>
+#include<string.h>
+
+    struct student
+    {
+        char name[100];
+        int address;
+        int salary;
+    };
+    int main()
+    {
+        struct student s[5],temp;
+        for(int i=0;i<5;i++)
+        {
+         printf("\nEnter details of student %d\n", i+1);
+        printf("enter the name\n");
+        scanf(" %[^\n]", s[i].name);
+        printf("enter the address\n");
+        scanf("%d", &s[i].address);
+        printf("enter the salary\n");
+        scanf("%d", &s[i].salary);
+        }
+        for(int i=0;i<5-1;i++)
+        {
+            for(int j=0;j<5-i-1;j++)
+            {
+                if(strcmp(s[j].name, s[j+1].name) > 0)
+
+                {
+                    temp=s[j];
+                    s[j]=s[j+1];
+                    s[j+1]=temp;
+                }
+            }
+        }
+        
+        printf("\nStudent Details:\n");
+        for(int i=0;i<5;i++)
+        {
+            printf("Name: %s\n", s[i].name);
+            printf("Address: %d\n", s[i].address);
+            printf("Salary: %d\n", s[i].salary);
+
+        }
+    
+    return 0;
+}

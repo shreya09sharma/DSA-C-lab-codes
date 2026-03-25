@@ -1,0 +1,55 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct node{
+    int coeff, exp;
+    struct node *next;
+};
+
+struct node* subtract(struct node* p1, struct node* p2){
+    struct node *result=NULL, *temp;
+
+    while(p1!=NULL && p2!=NULL){
+        temp = (struct node*)malloc(sizeof(struct node));
+        
+        if(p1->exp == p2->exp){
+            temp->coeff = p1->coeff - p2->coeff;
+            temp->exp = p1->exp;
+            p1=p1->next;
+            p2=p2->next;
+        }
+        else if(p1->exp > p2->exp){
+            temp->coeff = p1->coeff;
+            temp->exp = p1->exp;
+            p1=p1->next;
+        }
+        else{
+            temp->coeff = -p2->coeff;
+            temp->exp = p2->exp;
+            p2=p2->next;
+        }
+
+        temp->next = result;
+        result = temp;
+    }
+
+    while(p1!=NULL){
+        temp = (struct node*)malloc(sizeof(struct node));
+        temp->coeff = p1->coeff;
+        temp->exp = p1->exp;
+        temp->next = result;
+        result = temp;
+        p1=p1->next;
+    }
+
+    while(p2!=NULL){
+        temp = (struct node*)malloc(sizeof(struct node));
+        temp->coeff = -p2->coeff;
+        temp->exp = p2->exp;
+        temp->next = result;
+        result = temp;
+        p2=p2->next;
+    }
+
+    return result;
+}

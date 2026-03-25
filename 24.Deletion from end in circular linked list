@@ -1,0 +1,64 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* prev;
+    struct Node* next;
+};
+
+int main() {
+    struct Node *head = NULL, *newNode, *temp;
+    int n, i, value;
+
+    printf("Enter number of nodes: ");
+    scanf("%d", &n);
+
+    for(i = 0; i < n; i++) {
+        printf("Enter value: ");
+        scanf("%d", &value);
+
+        // Create new node
+        newNode = (struct Node*)malloc(sizeof(struct Node));
+        newNode->data = value;
+        newNode->prev = NULL;
+        newNode->next = NULL;
+
+       
+        if(head == NULL) {
+            head = newNode;
+            temp=newNode;
+        }
+        else {
+            temp->next=newNode;
+            newNode->prev=temp;
+            temp=newNode;
+            }
+
+           
+        
+       
+    }
+    temp->next=head;
+    head->prev=temp;
+    temp=head;
+    
+   do{
+       temp=temp->next;
+   }while(temp->next->next!=head);
+   free(temp->next);
+   temp->next=head;
+   head->prev=temp;
+   temp=head;
+    
+
+    do{
+        printf("%d <-> ", temp->data);
+        temp = temp->next;
+    }while(temp != head);
+    printf("NULL\n");
+
+   
+
+    return 0;
+}

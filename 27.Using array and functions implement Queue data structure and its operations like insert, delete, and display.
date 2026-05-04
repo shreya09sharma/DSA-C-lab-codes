@@ -1,0 +1,173 @@
+#include <stdio.h>
+#define MAX 5
+
+int queue[MAX];
+int front = -1;
+int rear = -1;
+
+
+void insert(int value) {
+    if (rear == MAX - 1) {
+        printf("Queue Overflow\n");
+        return;
+    }
+    if (front == -1) {
+        front = 0;
+    }
+    rear++;
+    queue[rear] = value;
+    printf("%d inserted into queue\n", value);
+}
+
+
+void delete() {
+    if (front == -1 || front > rear) {
+        printf("Queue Underflow\n");
+        return;
+    }
+    printf("%d deleted from queue\n", queue[front]);
+    front++;
+}
+
+void display() {
+    if (front == -1 || front > rear) {
+        printf("Queue is empty\n");
+        return;
+    }
+    printf("Queue elements are: ");
+    for (int i = front; i <= rear; i++) {
+        printf("%d ", queue[i]);
+    }
+    printf("\n");
+}
+
+int main() {
+    int choice, value;
+
+    while (1) {
+        printf("\n1. Insert\n2. Delete\n3. Display\n4. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                printf("Enter value: ");
+                scanf("%d", &value);
+                insert(value);
+                break;
+
+            case 2:
+                delete();
+                break;
+
+            case 3:
+                display();
+                break;
+
+            case 4:
+                return 0;
+
+            default:
+                printf("Invalid choice\n");
+        }
+    }
+    ////////linked list
+    #include <stdio.h>
+#include <stdlib.h>
+
+
+struct node {
+    int data;
+    struct node* next;
+};
+
+
+struct node *front = NULL, *rear = NULL;
+
+void insert(int value) {
+    struct node* newNode = (struct node*)malloc(sizeof(struct node));
+
+    newNode->data = value;
+    newNode->next = NULL;
+
+    
+    if (front == NULL) {
+        front = rear = newNode;
+    } else {
+        rear->next = newNode;
+        rear = newNode;
+    }
+
+    printf("%d inserted\n", value);
+}
+
+
+void delete() {
+    if (front == NULL) {
+        printf("Queue Underflow\n");
+        return;
+    }
+
+    struct node* temp = front;
+    printf("%d deleted\n", front->data);
+
+    front = front->next;
+
+    
+    if (front == NULL) {
+        rear = NULL;
+    }
+
+    free(temp);
+}
+
+
+void display() {
+    if (front == NULL) {
+        printf("Queue is empty\n");
+        return;
+    }
+
+    struct node* temp = front;
+
+    printf("Queue elements: ");
+    while (temp != NULL) {
+        printf("%d ", temp->data);
+        temp = temp->next;
+    }
+    printf("\n");
+}
+
+
+int main() {
+    int choice, value;
+
+    while (1) {
+        printf("\n1. Insert\n2. Delete\n3. Display\n4. Exit\n");
+        printf("Enter choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                printf("Enter value: ");
+                scanf("%d", &value);
+                insert(value);
+                break;
+
+            case 2:
+                delete();
+                break;
+
+            case 3:
+                display();
+                break;
+
+            case 4:
+                return 0;
+
+            default:
+                printf("Invalid choice\n");
+        }
+    }
+}
+}
